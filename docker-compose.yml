@@ -1,0 +1,64 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: datamart_db
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - datamart_net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  hadoop:
+    build:
+      context: ./hadoop
+      dockerfile: Dockerfile
+    container_name: datamart_hadoop
+    hostname: hadoop
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./data/input:/data/input:ro
+      - ./data/output:/data/output
+      - ./mapreduce:/mapreduce
+      - ./scripts:/scripts
+      - ssh_keys:/ssh_shared
+    networks:
+      - datamart_net
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: datamart_api
+    hostname: api
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${API_PORT:-5050}:${API_PORT:-5050}"
+    volumes:
+      - ./data/output:/data/output
+      - ./scripts:/scripts
+      - ssh_keys:/ssh_shared
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - datamart_net
+
+volumes:
+  pg_data:
+  ssh_keys:
+
+networks:
+  datamart_net:
+    driver: bridge
+

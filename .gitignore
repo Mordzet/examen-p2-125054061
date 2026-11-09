@@ -1,0 +1,23 @@
+# Ignorar datasets CSV y salidas pesadas
+*.csv
+data/input/*.csv
+data/output/
+
+# Ignorar binarios pesados de cache local
+*.tar.gz
+hadoop/*.tar.gz
+
+# Variables de entorno reales
+.env
+
+# Archivos temporales de Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
