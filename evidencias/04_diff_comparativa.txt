@@ -1,0 +1,1 @@
+EXITO: Los resultados de MapReduce (part-00000) y Secuencial (secuencial.txt) son 100% IDENTICOS.

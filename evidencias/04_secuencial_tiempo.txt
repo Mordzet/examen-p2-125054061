@@ -1,0 +1,5 @@
+
+[Secuencial] Registros agrupados: 121 | Tiempo: 63.3043 segundos
+real 63.35
+user 15.02
+sys 2.45

@@ -1,0 +1,3 @@
+=== Prueba SSH desde contenedor API hacia contenedor Hadoop ===
+Conexion SSH exitosa desde API -> usuario: root | host: hadoop
+Conexion SSH exitosa desde API -> usuario: hadoop | host: hadoop

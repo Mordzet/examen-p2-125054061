@@ -1,0 +1,2 @@
+SSH localhost exitoso en host: hadoop - Usuario: root
+Hadoop 3.3.6

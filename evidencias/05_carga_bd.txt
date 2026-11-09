@@ -1,0 +1,1 @@
+Se cargaron exitosamente 121 registros desde '/data/output/resultado/part-00000' hacia PostgreSQL.
